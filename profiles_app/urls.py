@@ -3,5 +3,5 @@ from profiles_app import views
 
 
 urlpatterns = [
-    path('hello-view/', views.ProfileApiView.as_view())
+    path('profiles-view/', views.ProfileApiView.as_view())
 ]
