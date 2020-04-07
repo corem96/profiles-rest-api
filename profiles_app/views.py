@@ -6,6 +6,7 @@ from profiles_app import serializers
 
 class ProfileApiView(APIView):
     """Test API View"""
+    serializer_class = serializers.HelloSerializer
 
     def get(self, request, format=None):
         """Request a list of APIView features"""
@@ -23,8 +24,21 @@ class ProfileApiView(APIView):
         serializer = self.serializer_class(data=request.data)
 
         if serializer.is_valid():
-            name = serializer.validated_data('name')
+            name = serializer.validated_data.get('name')
             message = f'Hello {name}'
             return Response({'message': message})
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def put(self, request, id=None):
+        """Handle updating an entire object"""
+        # serializer = self.serializer_class(data=request.data)
+        return Response({'method': 'PUT'})
+
+    def patch(self, request, id=None):
+        """Handle a partial update of an object"""
+        return Response({'method': 'PATCH'})
+
+    def delete(self, request, id=None):
+        """Handle deleting an object"""
+        return Response({'method': 'DELETE'})
